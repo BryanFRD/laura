@@ -12,7 +12,7 @@ LauraAPI.graphQL = async (query, variables) => {
 }
 
 export const gql = strings => {
-  return strings.join('');
+  return strings?.join('');
 }
 
 const useGraphQL = (query, variables) => {
