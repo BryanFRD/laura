@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import BaseScreen from './screens/BaseScreen';
-import HomeScreen from './screens/HomeScreen';
 import LoadingScreen from './screens/LoadingScreen';
+import HomeScreen from './screens/HomeScreen';
 
 function App() {
   return (
@@ -11,9 +11,9 @@ function App() {
       <Routes>
         <Route path='/' element={<BaseScreen />}>
           <Route index element={
-            <Suspense fallback={<LoadingScreen>
+            <Suspense fallback={<LoadingScreen />}>
               <HomeScreen />
-            </LoadingScreen>} />
+            </Suspense>
           }/>
         </Route>
       </Routes>
