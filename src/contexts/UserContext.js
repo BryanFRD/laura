@@ -1,17 +1,76 @@
 import React, { useState, useEffect } from 'react';
-import useGraphQL, { gql } from '../hooks/useFetch';
+import useCookie, { setCookie } from 'react-use-cookie';
+import { gql, LauraAPI } from '../hooks/useFetch';
 
 export const UserContext = React.createContext();
 
 const UserContextProvider = (props) => {
   const [user, setUser] = useState();
-  const { data } = useGraphQL(gql`query renewToken {renewToken}`);
+  const [authToken, setAuthToken] = useCookie('authToken');
   
   useEffect(() => {
-    setUser(data?.renewToken);
-  }, [data])
+    console.log('authToken:', authToken);
+  }, [authToken]);
   
-  return (<UserContext.Provider value={user}>{props.children}</UserContext.Provider>);
+  useEffect(() => {
+    refreshUser();
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
+  const refreshUser = async () => {
+    LauraAPI.graphQL(gql`query renewToken { renewToken {id} }`).then(response => {
+      console.log('refreshUser response:', response);
+      setUser(response?.data?.data?.renewToken);
+    }, () => {
+      handleLogout();
+    });
+  }
+  
+  const handleSignup = async ({email, password, firstname, lastname}) => {
+    return await LauraAPI.graphQL(gql`query register($email: String!, $password: String!, $firstname: String!, $lastname: String!) {
+      register(email: $email, password: $password, firstname: $firstname, lastname: $lastname) {
+        void
+      }
+    }
+    `, {email, password, firstname, lastname}).then(() => {
+      return true;
+    }, () => {
+      return false;
+    });
+  }
+  
+  const handleLogin = async ({email, password}) => {
+    return await LauraAPI.graphQL(gql`query login($email: String!, $password: String!) {
+      login(email: $email, password: $password) {
+        id firstname lastname role {
+          id title weight
+        }
+      }
+    }`, {email, password}).then(response => {
+      setUser(response?.data?.data?.login);
+      return true;
+    }, () => {
+      setUser(undefined);
+      return false;
+    });
+  }
+  
+  const handleLogout = async ({email, password, firstname, lastname}) => {
+    setCookie('authToken');
+    setCookie('accessToken');
+    setUser(undefined);
+  }
+  
+  return (<UserContext.Provider value={
+    {
+      user,
+      refreshUser,
+      handleSignup,
+      handleLogin,
+      handleLogout
+    }
+  }>{props.children}</UserContext.Provider>);
 }
 
 export default UserContextProvider;
