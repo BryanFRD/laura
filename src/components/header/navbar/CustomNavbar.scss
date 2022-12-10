@@ -1,0 +1,14 @@
+.navbar-link {
+  transition: all 100ms;
+  &:hover {
+    opacity: 85%;
+    scale: 1.1;
+  }
+}
+
+.navbar-basket-badge {
+  position: absolute;
+  font-size: 0.9rem;
+  top: 0;
+  left: 50%;
+}

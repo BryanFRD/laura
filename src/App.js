@@ -4,6 +4,7 @@ import './App.scss';
 import BaseScreen from './screens/BaseScreen';
 import LoadingScreen from './screens/LoadingScreen';
 import HomeScreen from './screens/HomeScreen';
+import NotFoundScreen from './screens/NotFoundScreen';
 
 function App() {
   return (
@@ -13,6 +14,11 @@ function App() {
           <Route index element={
             <Suspense fallback={<LoadingScreen />}>
               <HomeScreen />
+            </Suspense>
+          }/>
+          <Route path='*' element={
+            <Suspense fallback={<LoadingScreen />}>
+              <NotFoundScreen />
             </Suspense>
           }/>
         </Route>

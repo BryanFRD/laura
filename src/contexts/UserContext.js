@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import useCookie, { setCookie } from 'react-use-cookie';
+import { setCookie } from 'react-use-cookie';
 import { gql, LauraAPI } from '../hooks/useFetch';
 
 export const UserContext = React.createContext();
 
 const UserContextProvider = (props) => {
   const [user, setUser] = useState();
-  const [authToken, setAuthToken] = useCookie('authToken');
-  
-  useEffect(() => {
-    console.log('authToken:', authToken);
-  }, [authToken]);
   
   useEffect(() => {
     refreshUser();
@@ -56,7 +51,7 @@ const UserContextProvider = (props) => {
     });
   }
   
-  const handleLogout = async ({email, password, firstname, lastname}) => {
+  const handleLogout = async () => {
     setCookie('authToken');
     setCookie('accessToken');
     setUser(undefined);
