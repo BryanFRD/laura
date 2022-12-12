@@ -2,13 +2,14 @@ import { lazy } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Routes } from 'react-router-loading';
 import './App.scss';
+import LoadingScreen from './screens/LoadingScreen';
 import BaseScreen from './screens/BaseScreen';
 import HomeScreen from './screens/HomeScreen';
-import LoadingScreen from './screens/LoadingScreen';
-import NotFoundScreen from './screens/NotFoundScreen';
 
 const CartScreen = lazy(() => import('./screens/CartScreen'));
 const AccountScreen = lazy(() => import('./screens/AccountScreen'));
+const ConfirmationScreen = lazy(() => import('./screens/ConfirmationScreen'));
+const NotFoundScreen = lazy(() => import('./screens/NotFoundScreen'));
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
           <Route index element={<HomeScreen />}/>
           <Route path='/cart' element={<CartScreen />} loading/>
           <Route path='/account' element={<AccountScreen />} loading/>
-          <Route path='*' element={<NotFoundScreen />}/>
+          <Route path='/confirmation/:token' element={<ConfirmationScreen />} loading/>
+          <Route path='*' element={<NotFoundScreen />} loading/>
         </Route>
       </Routes>
     </BrowserRouter>

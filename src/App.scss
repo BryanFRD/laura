@@ -4,6 +4,10 @@
   cursor: pointer;
 }
 
+.hot-toast {
+  z-index: 13000 !important;
+}
+
 .underline-hover {
   --width: 85%;
   span {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Footer from '../components/footer/Footer';
 import CustomNavbar from '../components/header/navbar/CustomNavbar';
+import CustomToast from '../components/toast/CustomToast';
 
 
 const BaseScreen = () => {
@@ -13,6 +14,7 @@ const BaseScreen = () => {
       <main className='flex-grow-1'>
         <Outlet />
       </main>
+      <CustomToast />
       <footer>
         <Footer />
       </footer>

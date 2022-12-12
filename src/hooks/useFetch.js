@@ -19,14 +19,16 @@ export const gql = strings => {
 const useGraphQL = (query, variables) => {
   const {refreshUser} = useContext(UserContext);
   const [data, setData] = useState();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   
   const fetch = async (query, variables) => {
+    setLoading(true);
     return await LauraAPI.graphQL(query, variables)
       .then(response => {
         setLoading(false);
         setData(response?.data?.data);
+        return response;
       }, async error => {
         const originalRequest = error.config;
         if(error.response.status === 401 && !originalRequest.retry){
@@ -36,6 +38,8 @@ const useGraphQL = (query, variables) => {
         }
         setLoading(false);
         setError(error);
+        
+        return Promise.reject(error);
       });
   }
   

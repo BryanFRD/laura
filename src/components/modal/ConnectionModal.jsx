@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Nav, Tab } from 'react-bootstrap';
 import LoginForm from '../form/LoginForm';
+import SignupForm from '../form/SignupForm';
 
 const ConnectionModal = ({show, handleClose}) => {
   return (
@@ -22,10 +23,10 @@ const ConnectionModal = ({show, handleClose}) => {
           </Nav>
           <Tab.Content className='d-flex justify-content-center w-100 px-3'>
             <Tab.Pane eventKey='login' className='w-100'>
-              <LoginForm handleClose={handleClose} />
+              <LoginForm handleClose={handleClose}/>
             </Tab.Pane>
             <Tab.Pane eventKey='signup' className='w-100'>
-              A
+              <SignupForm handleClose={handleClose}/>
             </Tab.Pane>
           </Tab.Content>
         </Tab.Container>
