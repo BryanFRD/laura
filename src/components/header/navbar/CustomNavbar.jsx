@@ -8,14 +8,16 @@ import Badge from 'react-bootstrap/Badge';
 import { Link, NavLink } from 'react-router-dom';
 import useGraphQL, { gql } from '../../../hooks/useFetch';
 import { RiShoppingBasketLine, RiAccountCircleLine } from 'react-icons/ri'
+import { useEffect } from 'react';
 
 const CustomNavbar = () => {
-  const { data } = useGraphQL(gql`query getCategories {
-    getCategories {
-      id
-      title
-    }
-  }`);
+  const data = {getCategories: [{id: 'Salut', title: 'Salut :D'}]};
+  // const { data } = useGraphQL(gql`query getCategories {
+  //   getCategories {
+  //     id
+  //     title
+  //   }
+  // }`);
   
   return (
     <Navbar variant='black' className='flex-column' expand='lg'>
@@ -32,35 +34,34 @@ const CustomNavbar = () => {
               <RiShoppingBasketLine />
               <Badge pill bg='danger' text='light' className='navbar-basket-badge fw-semibold'>99+</Badge>
             </Link>
-            <Link to='account' className='text-dark navbar-link display-6'>
+            <Link to='account' className='text-dark navbar-link display-6 pe-auto'>
               <RiAccountCircleLine />
             </Link>
           </div>
         </Col>
       </Row>
-      <Navbar.Collapse id='custom-navbar' className='w-100 bg-primary fw-semibold fs-2'>
-        <Nav fill justify className='w-100 align-items-start px-4 ps-lg-0'>
+      <Navbar.Collapse id='custom-navbar' className='w-100 fw-semibold fs-2'>
+        <Nav fill justify className='w-100 px-4 px-lg-0'>
           {data?.getCategories?.map(category => 
-            <Nav.Item key={category.id} as={NavLink} to={category.title?.toLowerCase()}>
-              {category.title}
+            <Nav.Item
+              key={category.id}
+              as={NavLink}
+              className='text-dark text-decoration-none underline-hover'
+              to={`category/${category.title?.toLowerCase()}`}>
+                <span>{category.title}</span>
             </Nav.Item>
           )}
           <Nav.Item className='d-lg-none w-100'>
-            <Nav.Link as={NavLink} to='cart' className='text-dark my-1 d-flex justify-content-between gap-3'>
-              <span>Panier</span>
-              <Badge bg='danger' text='light' className='fw-semibold'>99+</Badge>
+            <Nav.Link as={NavLink} to='cart' className='text-dark my-1 d-flex justify-content-center gap-3 underline-hover'>
+              Panier
             </Nav.Link>
+            <Badge bg='danger' text='light' className='fw-semibold'>99+</Badge>
           </Nav.Item>
-          <Nav.Item className='d-lg-none w-100 '>
-            <Nav.Link as={NavLink} to='account' className='text-dark my-1 d-flex justify-content-start'>
+          <Nav.Item className='d-lg-none w-100'>
+            <Nav.Link as={NavLink} to='account' className='text-dark my-1 underline-hover'>
               Compte
             </Nav.Link>
           </Nav.Item>
-          {/* <Nav.Item>
-            <Nav.Link as={NavLink} to='shop'>
-              a
-            </Nav.Link>
-          </Nav.Item> */}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

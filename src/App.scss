@@ -1,3 +1,27 @@
 @import 'variables';
 
-@import '~bootstrap/scss/bootstrap';
+.underline-hover {
+  --width: 90%;
+  span {
+    position: relative;
+    overflow: hidden;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      bottom: 0;
+      left: 50%;
+      right: 50%;
+      width: 0;
+      height: 3px;
+      background-color: $dark;
+      transition: all 250ms;
+    }
+  }
+  
+  &:hover span:before {
+    width: var(--width);
+    left: calc((100% - var(--width)) / 2);
+  }
+}
