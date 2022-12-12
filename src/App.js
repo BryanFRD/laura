@@ -13,7 +13,7 @@ const AccountScreen = lazy(() => import('./screens/AccountScreen'));
 function App() {
   return (
     <BrowserRouter>
-      <Routes loadingScreen={<LoadingScreen />}>
+      <Routes loadingScreen={() => <LoadingScreen />}>
         <Route path='/' element={<BaseScreen />}>
           <Route index element={<HomeScreen />}/>
           <Route path='/cart' element={<CartScreen />} loading/>

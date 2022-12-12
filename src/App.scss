@@ -1,7 +1,11 @@
 @import 'variables';
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .underline-hover {
-  --width: 90%;
+  --width: 85%;
   span {
     position: relative;
     overflow: hidden;
@@ -14,14 +18,20 @@
       left: 50%;
       right: 50%;
       width: 0;
-      height: 3px;
+      height: 2px;
       background-color: $dark;
       transition: all 250ms;
     }
   }
   
-  &:hover span:before {
-    width: var(--width);
-    left: calc((100% - var(--width)) / 2);
+  &.active {
+    --width: 100%;
+  }
+  
+  &:hover, &.active {
+    span:before{
+      width: var(--width);
+      left: calc((100% - var(--width)) / 2);
+    }
   }
 }
