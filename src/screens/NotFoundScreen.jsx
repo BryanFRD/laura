@@ -9,10 +9,8 @@ const NotFoundScreen = () => {
   
   useEffect(() => {
     navigate('/');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  
-  loadingContext.done();
+    loadingContext.done();
+  }, [navigate, loadingContext]);
   return (
     <></>
   );

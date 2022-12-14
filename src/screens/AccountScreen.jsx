@@ -11,13 +11,13 @@ const AccountScreen = () => {
   const {user} = useContext(UserContext);
   const navigate = useNavigate();
   
-  loadingContext.done();
-  
   useEffect(() => {
     if(!user){
       navigate('/');
     }
-  }, [navigate, user]);
+    loadingContext.done();
+  }, [navigate, user, loadingContext]);
+  
   //TODO
   return (
     <Container>

@@ -25,13 +25,12 @@ const ConfirmationScreen = () => {
     
     toast.promise(request.current, {
       loading: 'Création de votre compte...',
-      success: 'Compte créée !',
+      success: 'Compte créé !',
       error: 'Erreur lors de la création de votre compte !'
     });
     
     loadingContext.done();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetch, navigate, token, loadingContext]);
   
   return (
     <></>

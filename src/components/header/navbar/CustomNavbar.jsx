@@ -7,14 +7,12 @@ import Nav from 'react-bootstrap/Nav';
 import Badge from 'react-bootstrap/Badge';
 import { Link, NavLink } from 'react-router-dom';
 import useGraphQL, { gql } from '../../../hooks/useFetch';
-import { RiShoppingBasketLine, RiAccountCircleLine } from 'react-icons/ri';
+import { RiShoppingBasketLine } from 'react-icons/ri';
 import ConnectionModal from '../../modal/ConnectionModal';
 import { useState } from 'react';
-import { useContext } from 'react';
-import { UserContext } from '../../../contexts/UserContext';
+import CustomNavbarAccountDropDown from './CustomNavbarAccountDropDown';
 
 const CustomNavbar = () => {
-  const { user } = useContext(UserContext);
   const [showModal, setShowModal] = useState(false);
   const { data } = useGraphQL(gql`query getCategories {
     getCategories {
@@ -23,20 +21,13 @@ const CustomNavbar = () => {
     }
   }`);
   
-  const handleClickAccount = (event) => {
-    if(!user){
-      event.preventDefault();
-      setShowModal(true);
-    }
-  }
-  
   const handleCloseModal = () => {
     setShowModal(false);
   }
   
   return (
     <>
-      <Navbar variant='black' className='flex-column' expand='lg'>
+      <Navbar variant='black' className='flex-column shadow-sm' expand='lg'>
         <Row className='w-100 my-3'>
           <Col xs={{span:6, offset: 3}} lg={{span: 6, offset: 3}}>
             <Link className='text-dark text-decoration-none' to='/'>
@@ -45,14 +36,12 @@ const CustomNavbar = () => {
           </Col>
           <Col xs={3} lg={3} className='align-self-center'>
             <Navbar.Toggle aria-controls='custom-navbar'/>
-            <div className='d-none d-lg-flex justify-content-end pe-5 align-items-center h-100 gap-3'>
+            <div className='d-none d-lg-flex justify-content-end pe-5 align-items-end h-100 gap-4'>
               <Link to='cart' className='text-dark navbar-link display-6 position-relative'>
                 <RiShoppingBasketLine />
                 <Badge pill bg='danger' text='light' className='navbar-basket-badge fw-semibold'>99+</Badge>
               </Link>
-              <Link to='account' className='text-dark navbar-link display-6 pe-auto' onClick={handleClickAccount}>
-                <RiAccountCircleLine />
-              </Link>
+              <CustomNavbarAccountDropDown setShowModal={setShowModal} />
             </div>
           </Col>
         </Row>

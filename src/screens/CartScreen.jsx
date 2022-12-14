@@ -1,9 +1,13 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useLoadingContext } from 'react-router-loading';
 
 const CartScreen = () => {
   const loadingContext = useLoadingContext();
-  loadingContext.done();
+  
+  useEffect(() => {
+    loadingContext.done();
+  }, [loadingContext])
   //TODO
   return (
     <div>

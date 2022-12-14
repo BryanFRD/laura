@@ -1,6 +1,5 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Footer from '../components/footer/Footer';
 import CustomNavbar from '../components/header/navbar/CustomNavbar';
 import CustomToast from '../components/toast/CustomToast';
 
@@ -15,9 +14,6 @@ const BaseScreen = () => {
         <Outlet />
       </main>
       <CustomToast />
-      <footer>
-        <Footer />
-      </footer>
     </div>
   );
 };

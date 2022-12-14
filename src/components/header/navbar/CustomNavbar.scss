@@ -1,9 +1,27 @@
+@use 'sass:color';
+@import '../../../variables.scss';
+
 #custom-navbar {
   transition: none;
 }
 
+.custom-navbar-account-dropdown {
+  &-toggle {
+    &::after, &::before {
+      content: none !important;
+    }
+  }
+  
+  a.dropdown-item {
+    &:hover, &:focus {
+      background-color: lighten($white, 5%) !important;
+    }
+  }
+}
+
 .navbar-link {
   transition: all 100ms;
+  z-index: 45;
   &:hover {
     opacity: 85%;
     scale: 1.1;
@@ -15,4 +33,5 @@
   font-size: 0.9rem;
   top: 0;
   left: 50%;
+  z-index: 50;
 }

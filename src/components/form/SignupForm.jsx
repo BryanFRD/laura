@@ -27,6 +27,7 @@ const SignupForm = ({handleClose}) => {
     
     if(signedIn){
       handleClose();
+      setHasError(undefined);
       toast.success('Un email vous a été envoyé !');
     } else {
       setHasError('Une erreur est survenue lors de votre inscription!');

@@ -5,7 +5,6 @@ import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { RiArrowLeftSLine } from 'react-icons/ri';
 import { UserContext } from '../../contexts/UserContext';
-import toast from 'react-hot-toast';
 
 const LoginForm = ({handleClose}) => {
   const {handleLogin} = useContext(UserContext);
@@ -17,12 +16,10 @@ const LoginForm = ({handleClose}) => {
     event.preventDefault();
     
     const jsonData = Object.fromEntries(new FormData(event.currentTarget));
-    console.log('jsonData:', jsonData);
     const loggedIn = await handleLogin(jsonData);
     
     if(loggedIn){
-      toast.success('Un email vous a été envoyé !');
-      setHasError('');
+      setHasError(undefined);
       handleClose()
     } else {
       setHasError('Vérifiez vos informations de connexion')

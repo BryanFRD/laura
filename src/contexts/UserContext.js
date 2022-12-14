@@ -14,8 +14,13 @@ const UserContextProvider = (props) => {
   }, []);
   
   const refreshUser = async () => {
-    LauraAPI.graphQL(gql`query renewToken { renewToken {id} }`).then(response => {
-      console.log('refreshUser response:', response);
+    LauraAPI.graphQL(gql`query renewToken {
+      renewToken {
+        id firstname lastname role {
+          id title weight isAdmin
+        }
+      }
+    }`).then(response => {
       setUser(response?.data?.data?.renewToken);
     }, () => {
       handleLogout();
@@ -39,7 +44,7 @@ const UserContextProvider = (props) => {
     return await LauraAPI.graphQL(gql`query login($email: String!, $password: String!) {
       login(email: $email, password: $password) {
         id firstname lastname role {
-          id title weight
+          id title weight isAdmin
         }
       }
     }`, {email, password}).then(response => {
