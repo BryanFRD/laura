@@ -11,7 +11,7 @@
 
 .background- {
   &light-hover {
-    &:hover, &:focus, &.active {
+    &:hover, &.active {
       background-color: lighten($white, 5%);
     }
     
@@ -20,7 +20,7 @@
     }
   }
   &dark-hover {
-    &:hover, &:focus, &.active {
+    &:hover, &.active {
       background-color: darken($white, 5%);
     }
     

@@ -36,8 +36,10 @@ const useGraphQL = (query, variables) => {
           
           return LauraAPI(originalRequest);
         }
+        const {data, errors} = error?.response?.data;
         setLoading(false);
-        setError(error);
+        setData(data);
+        setError(errors);
         
         return Promise.reject(error);
       });

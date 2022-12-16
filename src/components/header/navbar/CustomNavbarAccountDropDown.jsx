@@ -8,7 +8,7 @@ import { UserContext } from '../../../contexts/UserContext';
 const CustomNavbarAccountDropDown = ({setShowModal}) => {
   const {user, handleLogout} = useContext(UserContext);
   
-  const handleClickAccount = (event) => {
+  const handleClickAccount = () => {
     if(!user){
       setShowModal(true);
     }

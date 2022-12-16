@@ -13,7 +13,7 @@
   }
   
   a.dropdown-item {
-    &:hover, &:focus {
+    &:hover, &.active {
       background-color: lighten($white, 5%) !important;
     }
   }

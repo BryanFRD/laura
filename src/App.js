@@ -1,21 +1,18 @@
-import { lazy, useContext } from 'react';
+import { lazy } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Routes } from 'react-router-loading';
 import './App.scss';
 import LoadingScreen from './screens/LoadingScreen';
 import BaseScreen from './screens/BaseScreen';
 import HomeScreen from './screens/HomeScreen';
-import AdminScreen from './screens/AdminScreen';
-import { UserContext } from './contexts/UserContext';
 
 const CartScreen = lazy(() => import('./screens/CartScreen'));
 const AccountScreen = lazy(() => import('./screens/AccountScreen'));
+const AdminScreen = lazy(() => import('./screens/AdminScreen'));
 const ConfirmationScreen = lazy(() => import('./screens/ConfirmationScreen'));
 const NotFoundScreen = lazy(() => import('./screens/NotFoundScreen'));
 
 function App() {
-  const {user} = useContext(UserContext);
-  
   return (
     <BrowserRouter>
       <Routes loadingScreen={() => <LoadingScreen />}>

@@ -25,7 +25,7 @@ const AdminScreen = () => {
   return (
     <>
       {user?.role.isAdmin &&
-        <Tab.Container defaultActiveKey='categor'>
+        <Tab.Container defaultActiveKey='category'>
           <Row className='g-0 h-100'>
             <Col xs='auto' className='bg-white'>
               <LeftNavbarNav />
